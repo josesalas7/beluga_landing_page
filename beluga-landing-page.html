@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beluga — O CRM inteligente que transforma leads em contratos. IA e automação em cada etapa do funil comercial.">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Beluga — CRM Inteligente para Times de Vendas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafafa;
+      --bg-alt: #f5f5f7;
+      --surface: #ffffff;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --accent: #1d1d1f;
+      --accent-hover: #000000;
+      --accent-soft: rgba(29, 29, 31, 0.08);
+      --border: rgba(0, 0, 0, 0.06);
+      --border-strong: rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
+      --gradient-dark: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
+      --gradient-card: linear-gradient(135deg, #ffffff 0%, #f9f9fb 100%);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+      --shadow-xl: 0 24px 60px rgba(0,0,0,0.1);
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --font-display: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 250, 250, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(250, 250, 250, 0.92); }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px;
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 700; font-size: 20px;
+      color: var(--text-primary); text-decoration: none; letter-spacing: -0.5px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo svg { width: 26px; height: 26px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-size: 13px; color: var(--text-secondary); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      background: var(--accent) !important; color: #fff !important;
+      padding: 7px 18px !important; border-radius: 980px;
+      font-size: 13px !important; font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent-hover) !important; }
+    .nav-mobile-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 4px; color: var(--text-primary);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 140px 0 80px; text-align: center;
+      background: var(--gradient-hero);
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px; background: var(--border);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-soft); color: var(--accent);
+      padding: 6px 16px; border-radius: 980px; font-size: 13px;
+      font-weight: 600; margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.1s forwards;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); animation: pulse 2s infinite;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(44px, 6.5vw, 72px);
+      font-weight: 700; letter-spacing: -2.5px; line-height: 1.05;
+      color: var(--text-primary); max-width: 780px; margin: 0 auto 20px;
+      opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.2s forwards;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, #555555 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: clamp(17px, 2vw, 20px); color: var(--text-secondary);
+      max-width: 540px; margin: 0 auto 40px; line-height: 1.55;
+      font-weight: 400; letter-spacing: -0.2px;
+      opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.35s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff; border: none;
+      padding: 14px 30px; border-radius: 980px; font-size: 16px;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+      transition: all 0.3s var(--ease-out); font-family: var(--font-body);
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: scale(1.02); }
+    .btn-primary svg { width: 18px; height: 18px; transition: transform 0.3s var(--ease-out); }
+    .btn-primary:hover svg { transform: translateX(3px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--accent); border: none;
+      padding: 14px 30px; border-radius: 980px; font-size: 16px;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+      transition: all 0.3s var(--ease-out); font-family: var(--font-body);
+    }
+    .btn-secondary:hover { background: var(--accent-soft); }
+
+    /* ─── HERO VISUAL ─── */
+    .hero-visual {
+      margin-top: 64px; padding: 0 24px;
+      opacity: 0; animation: fadeUp 1s var(--ease-out) 0.65s forwards;
+    }
+    .hero-mockup {
+      max-width: 960px; margin: 0 auto;
+      background: var(--surface); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl), 0 0 0 1px var(--border);
+      overflow: hidden; position: relative;
+    }
+    .mockup-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+    .mockup-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+    }
+    .mockup-dot:nth-child(1) { background: #ff5f57; }
+    .mockup-dot:nth-child(2) { background: #febc2e; }
+    .mockup-dot:nth-child(3) { background: #28c840; }
+    .mockup-content {
+      display: grid; grid-template-columns: 220px 1fr; min-height: 420px;
+    }
+    .mockup-sidebar {
+      border-right: 1px solid var(--border); padding: 20px 16px;
+      background: var(--bg-alt);
+    }
+    .mockup-sidebar-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 10px; font-size: 13px;
+      color: var(--text-secondary); margin-bottom: 4px; font-weight: 500;
+    }
+    .mockup-sidebar-item.active {
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .mockup-sidebar-item svg { width: 16px; height: 16px; opacity: 0.6; }
+    .mockup-sidebar-item.active svg { opacity: 1; }
+    .mockup-main { padding: 24px; }
+    .mockup-pipeline {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      height: 100%;
+    }
+    .mockup-col {
+      background: var(--bg-alt); border-radius: 12px; padding: 12px;
+    }
+    .mockup-col-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--text-tertiary);
+      margin-bottom: 10px; padding: 0 4px;
+    }
+    .mockup-card {
+      background: var(--surface); border-radius: 10px; padding: 12px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .mockup-card-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .mockup-card-company { font-size: 11px; color: var(--text-tertiary); margin-bottom: 8px; }
+    .mockup-card-tag {
+      display: inline-block; padding: 2px 8px; border-radius: 6px;
+      font-size: 10px; font-weight: 600;
+    }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    .tag-blue { background: #e3f2fd; color: #1565c0; }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-purple { background: #f3e5f5; color: #7b1fa2; }
+    .mockup-card-ai {
+      display: flex; align-items: center; gap: 4px;
+      margin-top: 8px; font-size: 10px; color: var(--accent); font-weight: 600;
+    }
+    .mockup-card-ai svg { width: 12px; height: 12px; }
+
+    /* ─── SOCIAL PROOF ─── */
+    .social-proof {
+      padding: 56px 0; text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .social-proof p {
+      font-size: 13px; color: var(--text-tertiary); font-weight: 500;
+      letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 32px;
+    }
+    .logos {
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px; flex-wrap: wrap; opacity: 0.35;
+    }
+    .logos span {
+      font-family: var(--font-display); font-size: 20px; font-weight: 700;
+      color: var(--text-primary); letter-spacing: -0.5px;
+    }
+
+    /* ─── FEATURES SECTION ─── */
+    .features-section {
+      padding: 120px 0; position: relative;
+    }
+    .section-header {
+      text-align: center; margin-bottom: 72px;
+    }
+    .section-label {
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+    }
+    .section-header h2 {
+      font-family: var(--font-display); font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 700; letter-spacing: -1.5px; line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 18px; color: var(--text-secondary); max-width: 520px;
+      margin: 0 auto; line-height: 1.55;
+    }
+
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .feature-card {
+      background: var(--gradient-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 36px 28px;
+      transition: all 0.4s var(--ease-out); position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, var(--accent), #555555);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.5s var(--ease-out);
+    }
+    .feature-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--accent-soft); display: flex;
+      align-items: center; justify-content: center;
+      margin-bottom: 20px; color: var(--accent);
+    }
+    .feature-icon svg { width: 22px; height: 22px; }
+    .feature-card h3 {
+      font-family: var(--font-display); font-size: 18px; font-weight: 700;
+      letter-spacing: -0.3px; margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    }
+
+    /* ─── BIG FEATURE ROWS ─── */
+    .big-feature {
+      padding: 100px 0; border-top: 1px solid var(--border);
+    }
+    .big-feature-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .big-feature-inner.reverse { direction: rtl; }
+    .big-feature-inner.reverse > * { direction: ltr; }
+    .big-feature-text .section-label { text-align: left; }
+    .big-feature-text h2 {
+      font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 700; letter-spacing: -1px; line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .big-feature-text p {
+      font-size: 16px; color: var(--text-secondary); line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .feature-list {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+    }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 15px; color: var(--text-secondary);
+    }
+    .feature-list li svg {
+      width: 20px; height: 20px; color: var(--accent); flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .big-feature-visual {
+      background: var(--bg-alt); border-radius: var(--radius-lg);
+      border: 1px solid var(--border); overflow: hidden;
+      aspect-ratio: 4/3; display: flex; align-items: center;
+      justify-content: center; padding: 32px; position: relative;
+    }
+
+    /* ─── INSIGHT CARD MOCKUP ─── */
+    .insight-mockup {
+      width: 100%; max-width: 380px;
+      background: var(--surface); border-radius: 16px;
+      box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .insight-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .insight-header-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #555555);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .insight-header-icon svg { width: 16px; height: 16px; }
+    .insight-header-text { font-size: 14px; font-weight: 600; }
+    .insight-header-sub { font-size: 11px; color: var(--text-tertiary); }
+    .insight-body { padding: 20px; }
+    .insight-item {
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .insight-item:last-child { border-bottom: none; }
+    .insight-item-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--text-tertiary); margin-bottom: 6px;
+    }
+    .insight-item-value { font-size: 13px; line-height: 1.5; color: var(--text-primary); }
+
+    /* ─── PROPOSAL MOCKUP ─── */
+    .proposal-mockup {
+      width: 100%; max-width: 380px;
+      background: var(--surface); border-radius: 16px;
+      box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .proposal-header {
+      padding: 20px; background: linear-gradient(135deg, #1d1d1f, #2d2d30);
+      color: #fff;
+    }
+    .proposal-header h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .proposal-header p { font-size: 12px; opacity: 0.6; }
+    .proposal-body { padding: 20px; }
+    .proposal-section { margin-bottom: 16px; }
+    .proposal-section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--accent); margin-bottom: 8px;
+    }
+    .proposal-section p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    .proposal-bar {
+      height: 6px; background: var(--bg-alt); border-radius: 3px;
+      margin-top: 8px; overflow: hidden;
+    }
+    .proposal-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent), #555555);
+    }
+    .proposal-price {
+      display: flex; align-items: baseline; gap: 4px;
+      margin-top: 4px;
+    }
+    .proposal-price-value { font-size: 24px; font-weight: 700; font-family: var(--font-display); }
+    .proposal-price-label { font-size: 12px; color: var(--text-tertiary); }
+
+    /* ─── PIPELINE SECTION ─── */
+    .pipeline-visual {
+      display: flex; gap: 12px; width: 100%;
+    }
+    .pipeline-stage {
+      flex: 1; background: var(--surface);
+      border-radius: 12px; padding: 14px; text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .pipeline-stage-num {
+      font-family: var(--font-display); font-size: 28px;
+      font-weight: 700; color: var(--accent);
+    }
+    .pipeline-stage-label {
+      font-size: 11px; color: var(--text-tertiary); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    .pipeline-arrow {
+      display: flex; align-items: center; color: var(--text-tertiary);
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-section {
+      padding: 120px 0;
+      background: var(--gradient-dark); color: #fff;
+    }
+    .how-section .section-label { color: #555555; }
+    .how-section .section-header h2 { color: #fff; }
+    .how-section .section-header p { color: rgba(255,255,255,0.5); }
+    .steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+      margin-top: 64px; position: relative;
+    }
+    .steps::before {
+      content: ''; position: absolute; top: 32px; left: 10%; right: 10%;
+      height: 1px; background: rgba(255,255,255,0.1);
+    }
+    .step { text-align: center; position: relative; }
+    .step-num {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; font-family: var(--font-display);
+      font-size: 22px; font-weight: 700; color: #555555;
+      position: relative; z-index: 1;
+    }
+    .step h3 {
+      font-family: var(--font-display); font-size: 17px;
+      font-weight: 600; margin-bottom: 8px; letter-spacing: -0.2px;
+    }
+    .step p {
+      font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.55;
+      max-width: 240px; margin: 0 auto;
+    }
+
+    /* ─── METRICS ─── */
+    .metrics-section { padding: 100px 0; border-top: 1px solid var(--border); }
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+      text-align: center;
+    }
+    .metric-value {
+      font-family: var(--font-display); font-size: clamp(40px, 5vw, 56px);
+      font-weight: 700; letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--accent), #555555);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1;
+    }
+    .metric-label {
+      font-size: 14px; color: var(--text-tertiary); margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-section {
+      padding: 100px 0; background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+    }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .testimonial-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 32px;
+    }
+    .testimonial-stars {
+      display: flex; gap: 2px; margin-bottom: 16px; color: #f5a623;
+    }
+    .testimonial-stars svg { width: 16px; height: 16px; }
+    .testimonial-text {
+      font-size: 15px; line-height: 1.65; color: var(--text-primary);
+      margin-bottom: 24px; font-style: italic;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent-soft); display: flex; align-items: center;
+      justify-content: center; font-weight: 700; font-size: 15px;
+      color: var(--accent); font-family: var(--font-display);
+    }
+    .testimonial-name { font-size: 14px; font-weight: 600; }
+    .testimonial-role { font-size: 12px; color: var(--text-tertiary); }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      padding: 120px 0; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,113,227,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .cta-section h2 {
+      font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700; letter-spacing: -2px; line-height: 1.05;
+      margin-bottom: 16px; position: relative;
+    }
+    .cta-section p {
+      font-size: 18px; color: var(--text-secondary); max-width: 480px;
+      margin: 0 auto 40px; line-height: 1.55;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 56px 0 32px; border-top: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p {
+      font-size: 13px; color: var(--text-tertiary); margin-top: 12px;
+      max-width: 260px; line-height: 1.55;
+    }
+    .footer-col h4 {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--text-tertiary); margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block; font-size: 14px; color: var(--text-secondary);
+      text-decoration: none; margin-bottom: 10px; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--text-primary); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 12px; color: var(--text-tertiary); }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a {
+      font-size: 12px; color: var(--text-tertiary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-bottom-links a:hover { color: var(--text-secondary); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: all 0.8s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .big-feature-inner { grid-template-columns: 1fr; gap: 48px; }
+      .big-feature-inner.reverse { direction: ltr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .steps::before { display: none; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .mockup-content { grid-template-columns: 180px 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+      .hero { padding: 120px 0 60px; }
+      .hero h1 { letter-spacing: -1.5px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .mockup-content { grid-template-columns: 1fr; }
+      .mockup-sidebar { display: none; }
+      .mockup-pipeline { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; gap: 40px; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .pipeline-visual { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .mockup-pipeline { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#1d1d1f"/>
+          <path d="M8 16C8 16 12 10 16 10C20 10 20 14 20 14C20 14 20 18 24 18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="20" r="2" fill="white" opacity="0.6"/>
+        </svg>
+        Beluga
+      </a>
+      <div class="nav-links">
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#contato" class="nav-cta">Começar agora</a>
+      </div>
+      <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Seu time de vendas com <span>inteligência artificial</span></h1>
+      <p>Beluga é o CRM que acompanha cada lead do primeiro contato ao fechamento. IA e automação para vender mais, melhor e mais rápido.</p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary">
+          Começar gratuitamente
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#como-funciona" class="btn-secondary">
+          Ver como funciona
+        </a>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-mockup">
+          <div class="mockup-bar">
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="mockup-sidebar">
+              <div class="mockup-sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                Pipeline
+              </div>
+              <div class="mockup-sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Leads
+              </div>
+              <div class="mockup-sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                WhatsApp
+              </div>
+              <div class="mockup-sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                Dashboard
+              </div>
+              <div class="mockup-sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Configurações
+              </div>
+            </div>
+            <div class="mockup-main">
+              <div class="mockup-pipeline">
+                <div class="mockup-col">
+                  <div class="mockup-col-title">Lead</div>
+                  <div class="mockup-card">
+                    <div class="mockup-card-name">Marina Souza</div>
+                    <div class="mockup-card-company">TechBridge</div>
+                    <div class="mockup-card-tag tag-green">WhatsApp</div>
+                    <div class="mockup-card-ai">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg>
+                      AI Insight disponível
+                    </div>
+                  </div>
+                  <div class="mockup-card">
+                    <div class="mockup-card-name">Pedro Lima</div>
+                    <div class="mockup-card-company">NovaPay</div>
+                    <div class="mockup-card-tag tag-blue">Site</div>
+                  </div>
+                </div>
+                <div class="mockup-col">
+                  <div class="mockup-col-title">Diagnóstico</div>
+                  <div class="mockup-card">
+                    <div class="mockup-card-name">Julia Ferreira</div>
+                    <div class="mockup-card-company">EdStart</div>
+                    <div class="mockup-card-tag tag-orange">Reunião 14h</div>
+                  </div>
+                </div>
+                <div class="mockup-col">
+                  <div class="mockup-col-title">Proposta</div>
+                  <div class="mockup-card">
+                    <div class="mockup-card-name">Rafael Costa</div>
+                    <div class="mockup-card-company">LogiFlow</div>
+                    <div class="mockup-card-tag tag-purple">R$ 45k</div>
+                    <div class="mockup-card-ai">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg>
+                      Proposta gerada
+                    </div>
+                  </div>
+                </div>
+                <div class="mockup-col">
+                  <div class="mockup-col-title">Fechamento</div>
+                  <div class="mockup-card">
+                    <div class="mockup-card-name">Ana Martins</div>
+                    <div class="mockup-card-company">Grupo Vértice</div>
+                    <div class="mockup-card-tag tag-green">Contrato</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="funcionalidades">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Funcionalidades</div>
+        <h2>Tudo que seu time precisa.<br>Nada que não precisa.</h2>
+        <p>Cada funcionalidade foi pensada para acelerar a conversão e dar superpoderes ao seu time comercial.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Captura via WhatsApp</h3>
+          <p>Lead entra em contato e automaticamente vira um card no CRM com todo o histórico da conversa vinculado.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+          </div>
+          <h3>Bot Pré-Diagnóstico</h3>
+          <p>Perguntas automáticas configuráveis capturam nome, empresa, projeto, orçamento e prazo antes mesmo da reunião.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+          </div>
+          <h3>AI Insights Pré-Reunião</h3>
+          <p>Inteligência artificial analisa os dados do lead e gera recomendações estratégicas para conduzir a reunião.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>Agendamento Inteligente</h3>
+          <p>Agende reuniões direto do CRM com integração ao Google Agenda. Convites e lembretes automáticos por WhatsApp.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>Relatório Pós-Reunião</h3>
+          <p>IA gera relatório completo a partir da transcrição: dores, objeções, orçamento, riscos e próximos passos.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Proposta com IA</h3>
+          <p>Gere rascunhos de propostas comerciais com base no diagnóstico, regras comerciais e contexto do cliente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIG FEATURE 1 - AI INSIGHTS -->
+  <section class="big-feature" id="ai-insights">
+    <div class="container">
+      <div class="big-feature-inner">
+        <div class="big-feature-text reveal">
+          <div class="section-label">Inteligência Artificial</div>
+          <h2>Insights que transformam reuniões em contratos</h2>
+          <p>Antes de cada reunião, a IA analisa tudo que o lead compartilhou e entrega um briefing estratégico para o assessor. Dores, oportunidades e perguntas-chave — tudo pronto para converter.</p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Contexto completo do lead resumido
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Dores e oportunidades identificadas
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Perguntas recomendadas para a reunião
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Pontos estratégicos a explorar
+            </li>
+          </ul>
+        </div>
+        <div class="big-feature-visual reveal">
+          <div class="insight-mockup">
+            <div class="insight-header">
+              <div class="insight-header-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <div class="insight-header-text">AI Insights</div>
+                <div class="insight-header-sub">Julia Ferreira — EdStart</div>
+              </div>
+            </div>
+            <div class="insight-body">
+              <div class="insight-item">
+                <div class="insight-item-label">Contexto</div>
+                <div class="insight-item-value">Startup EdTech em fase de crescimento, buscando plataforma de gestão escolar customizada.</div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-item-label">Dores Identificadas</div>
+                <div class="insight-item-value">Sistema atual não escala. Perda de dados frequente. Time sobrecarregado com processos manuais.</div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-item-label">Perguntas Recomendadas</div>
+                <div class="insight-item-value">Qual o volume atual de alunos? Existe integração com sistemas de pagamento? Qual o prazo ideal de entrega?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIG FEATURE 2 - PROPOSALS -->
+  <section class="big-feature">
+    <div class="container">
+      <div class="big-feature-inner reverse">
+        <div class="big-feature-text reveal">
+          <div class="section-label">Propostas Inteligentes</div>
+          <h2>Da reunião à proposta em minutos, não dias</h2>
+          <p>A IA usa o diagnóstico, a transcrição da reunião e as regras comerciais da empresa para gerar um rascunho de proposta pronto para revisão. Menos trabalho operacional, mais tempo vendendo.</p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Entendimento do problema estruturado
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Solução proposta com cronograma
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Sugestão inteligente de faixa de preço
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Argumentos de conversão personalizados
+            </li>
+          </ul>
+        </div>
+        <div class="big-feature-visual reveal">
+          <div class="proposal-mockup">
+            <div class="proposal-header">
+              <h4>Proposta Comercial — EdStart</h4>
+              <p>Gerada por IA · 12 de março, 2026</p>
+            </div>
+            <div class="proposal-body">
+              <div class="proposal-section">
+                <div class="proposal-section-title">Entendimento</div>
+                <p>Plataforma de gestão escolar com módulos de matrícula, pagamento e comunicação com pais.</p>
+              </div>
+              <div class="proposal-section">
+                <div class="proposal-section-title">Solução</div>
+                <p>Desenvolvimento full-stack em 3 sprints com entregas quinzenais. MVP em 6 semanas.</p>
+                <div class="proposal-bar"><div class="proposal-bar-fill" style="width: 65%"></div></div>
+              </div>
+              <div class="proposal-section">
+                <div class="proposal-section-title">Investimento sugerido</div>
+                <div class="proposal-price">
+                  <div class="proposal-price-value">R$ 38k</div>
+                  <div class="proposal-price-label">— R$ 52k</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="como-funciona">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Como funciona</div>
+        <h2>Do primeiro contato ao fechamento</h2>
+        <p>Quatro etapas, um sistema. A IA trabalha junto com seu time em cada fase.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <h3>Captura</h3>
+          <p>Lead entra pelo WhatsApp. Bot coleta informações e cria o card automaticamente no pipeline.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">2</div>
+          <h3>Diagnóstico</h3>
+          <p>IA gera insights estratégicos. Reunião agendada com convites e lembretes automáticos.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">3</div>
+          <h3>Proposta</h3>
+          <p>Relatório pós-reunião + proposta comercial gerados por IA. Tudo pronto para enviar.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">4</div>
+          <h3>Fechamento</h3>
+          <p>Alertas de leads parados, follow-ups sugeridos e dashboard com métricas de conversão em tempo real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section class="metrics-section" id="resultados">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Resultados</div>
+        <h2>Números que falam por si</h2>
+      </div>
+      <div class="metrics-grid reveal">
+        <div>
+          <div class="metric-value">3x</div>
+          <div class="metric-label">mais reuniões agendadas</div>
+        </div>
+        <div>
+          <div class="metric-value">47%</div>
+          <div class="metric-label">aumento na taxa de conversão</div>
+        </div>
+        <div>
+          <div class="metric-value">80%</div>
+          <div class="metric-label">menos tempo em propostas</div>
+        </div>
+        <div>
+          <div class="metric-value">2min</div>
+          <div class="metric-label">para gerar AI Insights</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contato">
+    <div class="container">
+      <h2 class="reveal">Pronto para vender<br>de forma inteligente?</h2>
+      <p class="reveal">Comece gratuitamente. Sem cartão de crédito. Configure em 5 minutos.</p>
+      <div class="hero-actions reveal">
+        <a href="#" class="btn-primary">
+          Começar agora — é grátis
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn-secondary">Agendar demonstração</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 Beluga. Todos os direitos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Close mobile menu if open
+          const links = document.querySelector('.nav-links');
+          if (window.innerWidth <= 768) links.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
